@@ -12,7 +12,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **ZOOM-01**: User is notified if Zoom app is not installed before proceeding
 - [x] **ZOOM-02**: User is notified if not logged into Zoom before proceeding
 - [x] **ZOOM-03**: Tool discovers Zoom backgrounds directory dynamically (not hardcoded)
-- [ ] **ZOOM-04**: Tool saves approved image to Zoom backgrounds directory automatically
+- [x] **ZOOM-04**: Tool saves approved image to Zoom backgrounds directory automatically
 
 ### AI Image Generation
 
@@ -24,9 +24,9 @@ Requirements for initial release. Each maps to roadmap phases.
 ### User Workflow
 
 - [x] **FLOW-01**: Tool displays generated image in browser for preview
-- [ ] **FLOW-02**: User can approve image by typing "yes" or reject by typing "no"
-- [ ] **FLOW-03**: User can modify prompt and regenerate when rejecting an image
-- [ ] **FLOW-04**: Tool shows progress indicators during image generation (15-90s wait)
+- [x] **FLOW-02**: User can approve image by typing "yes" or reject by typing "no"
+- [x] **FLOW-03**: User can modify prompt and regenerate when rejecting an image
+- [x] **FLOW-04**: Tool shows progress indicators during image generation (15-90s wait)
 
 ### Configuration
 
@@ -74,15 +74,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ZOOM-01 | Phase 1 | Complete (Plan 01-02) |
 | ZOOM-02 | Phase 1 | Complete (Plan 01-02) |
 | ZOOM-03 | Phase 1 | Complete (Plan 01-02) |
-| ZOOM-04 | Phase 2 | Pending |
+| ZOOM-04 | Phase 2 | Complete |
 | AI-01 | Phase 1 | Complete |
 | AI-02 | Phase 4 | Pending |
 | AI-03 | Phase 4 | Pending |
 | AI-04 | Phase 4 | Pending |
 | FLOW-01 | Phase 2 | Complete |
-| FLOW-02 | Phase 2 | Pending |
-| FLOW-03 | Phase 2 | Pending |
-| FLOW-04 | Phase 2 | Pending |
+| FLOW-02 | Phase 2 | Complete |
+| FLOW-03 | Phase 2 | Complete |
+| FLOW-04 | Phase 2 | Complete |
 | CONFIG-01 | Phase 1 | Complete |
 | CONFIG-02 | Phase 3 | Pending |
 | CONFIG-03 | Phase 4 | Pending |
