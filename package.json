@@ -8,16 +8,22 @@
     "build": "tsc",
     "dev": "tsx watch src/index.ts"
   },
-  "keywords": ["zoom", "background", "ai", "cli"],
+  "keywords": [
+    "zoom",
+    "background",
+    "ai",
+    "cli"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@huggingface/inference": "^4.13.12",
     "conf": "^15.1.0",
-    "@huggingface/inference": "^4.13.12"
+    "open": "^11.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
     "@types/node": "^22.10.6",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   }
 }
