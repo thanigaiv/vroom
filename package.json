@@ -4,9 +4,13 @@
   "description": "CLI tool for generating AI-powered Zoom backgrounds",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "zoombg": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx src/cli.ts",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "zoom",
