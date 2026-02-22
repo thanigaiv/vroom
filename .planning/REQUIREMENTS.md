@@ -9,9 +9,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### System Integration
 
-- [ ] **ZOOM-01**: User is notified if Zoom app is not installed before proceeding
-- [ ] **ZOOM-02**: User is notified if not logged into Zoom before proceeding
-- [ ] **ZOOM-03**: Tool discovers Zoom backgrounds directory dynamically (not hardcoded)
+- [x] **ZOOM-01**: User is notified if Zoom app is not installed before proceeding
+- [x] **ZOOM-02**: User is notified if not logged into Zoom before proceeding
+- [x] **ZOOM-03**: Tool discovers Zoom backgrounds directory dynamically (not hardcoded)
 - [ ] **ZOOM-04**: Tool saves approved image to Zoom backgrounds directory automatically
 
 ### AI Image Generation
@@ -71,9 +71,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ZOOM-01 | Phase 1 | Pending |
-| ZOOM-02 | Phase 1 | Pending |
-| ZOOM-03 | Phase 1 | Pending |
+| ZOOM-01 | Phase 1 | Complete (Plan 01-02) |
+| ZOOM-02 | Phase 1 | Complete (Plan 01-02) |
+| ZOOM-03 | Phase 1 | Complete (Plan 01-02) |
 | ZOOM-04 | Phase 2 | Pending |
 | AI-01 | Phase 1 | Pending |
 | AI-02 | Phase 4 | Pending |
