@@ -16,6 +16,7 @@ import { join } from 'node:path';
 import ora from 'ora';
 import { createAIService } from '../services/ai/factory.js';
 import { BackgroundManager } from '../services/zoom/background-manager.js';
+import { ZoomVerifier } from '../services/zoom/verifier.js';
 import { showPreview } from './preview.js';
 import { cleanupManager } from '../utils/cleanup.js';
 
@@ -38,6 +39,10 @@ import { cleanupManager } from '../utils/cleanup.js';
  * await generateWorkflow();
  */
 export async function generateWorkflow(): Promise<void> {
+  // Verify Zoom prerequisites (fail fast before generation)
+  const verifier = new ZoomVerifier();
+  await verifier.verify(); // Throws ZoomNotInstalledError or ZoomNotLoggedInError
+
   let approved = false;
   let currentPrompt = await input({
     message: 'Describe the Zoom background you want:',
