@@ -34,6 +34,8 @@ Progress: [██████░░░░] 67% (2/3 plans in phase 1)
 |------|----------|-------|-------|-----------|
 | 01-02 | 3.2 min | 3 | 3 | 2026-02-22 |
 | 01-01 | ~3 min | 3 | 5 | 2026-02-21 |
+| Phase 01-foundation-and-core-services P01 | 5 | 3 tasks | 7 files |
+| Phase 01 P03 | 6 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -49,6 +51,11 @@ Recent decisions affecting current work:
 - Check both app bundle AND executable for Zoom verification: Prevents false positives from incomplete installations (Plan 01-02)
 - Multiple directory patterns with glob fallback for Zoom backgrounds: Handles different Zoom versions without breaking (Plan 01-02)
 - Use os.homedir() not tilde expansion: Node.js path module doesn't expand ~ (Plan 01-02)
+- [Phase 01-foundation-and-core-services]: ConfigService throws ConfigPermissionError instead of console.warn for permission failures
+- [Phase 01-foundation-and-core-services]: Used AIService type union for compile-time service name validation
+- [Phase 01]: Use Strategy pattern for AI service abstraction to enable zero-orchestration-change provider additions
+- [Phase 01]: Use FLUX.1-schnell model for Hugging Face free tier (fast, no API key required)
+- [Phase 01]: Implement atomic file writes with temp-then-rename to prevent corruption on crash
 
 ### Pending Todos
 
