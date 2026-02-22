@@ -5,6 +5,8 @@
 
 import Conf from 'conf';
 import { chmod } from 'node:fs/promises';
+import type { Config, AIService } from '../types/index.js';
+import { ConfigPermissionError } from './errors.js';
 
 const schema = {
   huggingfaceApiKey: {
@@ -29,7 +31,7 @@ const schema = {
  * ConfigService manages API key storage with enforced 0600 permissions
  */
 export class ConfigService {
-  private store: Conf<typeof schema>;
+  private store: Conf<Config>;
 
   constructor() {
     this.store = new Conf({
@@ -50,23 +52,23 @@ export class ConfigService {
     try {
       await chmod(configPath, 0o600); // owner read/write only
     } catch (error) {
-      console.warn(`Warning: Could not set secure permissions on ${configPath}`);
+      throw new ConfigPermissionError(configPath, error as Error);
     }
   }
 
   /**
    * Get API key for a specific service
    */
-  getApiKey(service: string): string | undefined {
-    const key = `${service}ApiKey` as keyof typeof schema;
-    return this.store.get(key) || undefined;
+  getApiKey(service: AIService): string | undefined {
+    const key = `${service}ApiKey` as keyof Config;
+    return this.store.get(key) as string | undefined;
   }
 
   /**
    * Set API key for a specific service and re-enforce permissions
    */
-  async setApiKey(service: string, apiKey: string): Promise<void> {
-    const key = `${service}ApiKey` as keyof typeof schema;
+  async setApiKey(service: AIService, apiKey: string): Promise<void> {
+    const key = `${service}ApiKey` as keyof Config;
     this.store.set(key, apiKey);
     await this.enforceSecurePermissions(); // Re-enforce after write
   }
@@ -81,7 +83,7 @@ export class ConfigService {
   /**
    * Set the last used AI service preference
    */
-  async setLastUsedService(service: string): Promise<void> {
+  async setLastUsedService(service: AIService): Promise<void> {
     this.store.set('lastUsedService', service);
     await this.enforceSecurePermissions();
   }
