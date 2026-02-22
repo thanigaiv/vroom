@@ -63,10 +63,10 @@ Plans:
   2. User can select which AI service to use via command-line flag
   3. Tool displays help documentation with usage examples when requested
   4. Tool shows clear error messages for invalid arguments or missing dependencies
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] TBD
+- [ ] 03-01-PLAN.md — CLI entry point with commander, service selection, help documentation
 
 ### Phase 4: Multi-Service Support
 **Goal**: Add paid AI providers to validate service abstraction and enable quality upgrades
@@ -105,6 +105,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation & Core Services | 2/3 | Complete    | 2026-02-22 |
 | 2. Workflow Orchestration | 2/2 | Complete    | 2026-02-22 |
-| 3. CLI Interface | 0/TBD | Not started | - |
+| 3. CLI Interface | 0/1 | Not started | - |
 | 4. Multi-Service Support | 0/TBD | Not started | - |
 | 5. Enhancement & Polish | 0/TBD | Not started | - |
