@@ -23,7 +23,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### User Workflow
 
-- [ ] **FLOW-01**: Tool displays generated image in browser for preview
+- [x] **FLOW-01**: Tool displays generated image in browser for preview
 - [ ] **FLOW-02**: User can approve image by typing "yes" or reject by typing "no"
 - [ ] **FLOW-03**: User can modify prompt and regenerate when rejecting an image
 - [ ] **FLOW-04**: Tool shows progress indicators during image generation (15-90s wait)
@@ -79,7 +79,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AI-02 | Phase 4 | Pending |
 | AI-03 | Phase 4 | Pending |
 | AI-04 | Phase 4 | Pending |
-| FLOW-01 | Phase 2 | Pending |
+| FLOW-01 | Phase 2 | Complete |
 | FLOW-02 | Phase 2 | Pending |
 | FLOW-03 | Phase 2 | Pending |
 | FLOW-04 | Phase 2 | Pending |
