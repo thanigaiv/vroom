@@ -130,9 +130,9 @@ Phase 2 (Workflow Orchestration) can now:
 
 | Commit | Type | Description | Files |
 |--------|------|-------------|-------|
-| 4873e73 | feat | Create platform utilities for macOS paths | src/utils/platform.ts, src/services/errors.ts |
-| 7d83f68 | feat | Create Zoom verifier for installation and login checks | src/services/zoom/verifier.ts |
-| c50fd02 | feat | Create background manager with dynamic directory discovery | src/services/zoom/background-manager.ts |
+| c052059 | feat | Create platform utilities for macOS paths | src/utils/platform.ts |
+| ed70e6b | feat | Create Zoom verifier for installation and login checks | src/services/zoom/verifier.ts |
+| e9b5f23 | feat | Create background manager with dynamic directory discovery | src/services/zoom/background-manager.ts |
 
 ## Self-Check: PASSED
 
@@ -145,9 +145,9 @@ Phase 2 (Workflow Orchestration) can now:
 
 **Commits exist:**
 ```bash
-✅ FOUND: 4873e73 (platform utilities)
-✅ FOUND: 7d83f68 (Zoom verifier)
-✅ FOUND: c50fd02 (background manager)
+✅ FOUND: c052059 (platform utilities)
+✅ FOUND: ed70e6b (Zoom verifier)
+✅ FOUND: e9b5f23 (background manager)
 ```
 
 **Key functionality verified:**
