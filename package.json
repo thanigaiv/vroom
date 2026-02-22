@@ -1,0 +1,23 @@
+{
+  "name": "zoombg",
+  "version": "0.1.0",
+  "description": "CLI tool for generating AI-powered Zoom backgrounds",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts"
+  },
+  "keywords": ["zoom", "background", "ai", "cli"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "conf": "^15.1.0",
+    "@huggingface/inference": "^4.13.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.6",
+    "tsx": "^4.19.2"
+  }
+}
