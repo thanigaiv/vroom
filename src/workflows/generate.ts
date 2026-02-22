@@ -21,6 +21,15 @@ import { showPreview } from './preview.js';
 import { cleanupManager } from '../utils/cleanup.js';
 
 /**
+ * Options for the workflow.
+ */
+export interface WorkflowOptions {
+  initialPrompt?: string;
+  service?: string;
+  interactive?: boolean;
+}
+
+/**
  * Main workflow: prompt → generate → preview → approve → save.
  *
  * Runs iterative loop allowing user to:
@@ -30,6 +39,7 @@ import { cleanupManager } from '../utils/cleanup.js';
  * - Modify prompt and try again
  * - Cancel at any point
  *
+ * @param options - Workflow configuration options
  * @throws {ZoomNotInstalledError} if Zoom is not installed
  * @throws {ZoomNotLoggedInError} if Zoom is not logged in
  * @throws {AIServiceError} if image generation fails
@@ -37,16 +47,38 @@ import { cleanupManager } from '../utils/cleanup.js';
  * @example
  * // Run complete workflow
  * await generateWorkflow();
+ *
+ * @example
+ * // Run with initial prompt
+ * await generateWorkflow({ initialPrompt: 'mountain sunset' });
+ *
+ * @example
+ * // Run with specific service
+ * await generateWorkflow({ service: 'openai' });
  */
-export async function generateWorkflow(): Promise<void> {
+export async function generateWorkflow(options: WorkflowOptions = {}): Promise<void> {
+  const {
+    initialPrompt,
+    service = 'huggingface',
+    interactive = true
+  } = options;
   // Verify Zoom prerequisites (fail fast before generation)
   const verifier = new ZoomVerifier();
   await verifier.verify(); // Throws ZoomNotInstalledError or ZoomNotLoggedInError
 
   let approved = false;
-  let currentPrompt = await input({
-    message: 'Describe the Zoom background you want:',
-  });
+  let currentPrompt: string;
+
+  // Get initial prompt (from options or interactive prompt)
+  if (initialPrompt) {
+    currentPrompt = initialPrompt;
+  } else if (interactive) {
+    currentPrompt = await input({
+      message: 'Describe the Zoom background you want:',
+    });
+  } else {
+    throw new Error('initialPrompt is required when interactive mode is disabled');
+  }
 
   while (!approved) {
     let tempDir: string | undefined;
@@ -55,7 +87,7 @@ export async function generateWorkflow(): Promise<void> {
       // Generate with spinner (may take 15-90 seconds on free tier)
       const spinner = ora('Generating image (may take 15-90 seconds)...').start();
 
-      const aiService = createAIService('huggingface');
+      const aiService = createAIService(service as any);
       const result = await aiService.generateImage(currentPrompt);
 
       // Stop spinner before showing prompt (prevents terminal corruption)
