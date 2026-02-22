@@ -30,10 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Tool discovers Zoom backgrounds directory dynamically without hardcoded paths
   4. Tool stores API keys with 0600 file permissions
   5. Tool generates images using Hugging Face free tier without requiring API keys
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD
+- [ ] 01-01-PLAN.md — Project setup, config service with secure storage, error types
+- [ ] 01-02-PLAN.md — Zoom verifier with installation/login checks, dynamic directory discovery
+- [ ] 01-03-PLAN.md — AI service abstraction with Hugging Face implementation
 
 ### Phase 2: Workflow Orchestration
 **Goal**: Coordinate services into complete generate→preview→approve→save workflow with iterative refinement
@@ -100,7 +102,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Core Services | 0/TBD | Not started | - |
+| 1. Foundation & Core Services | 0/3 | Ready to execute | - |
 | 2. Workflow Orchestration | 0/TBD | Not started | - |
 | 3. CLI Interface | 0/TBD | Not started | - |
 | 4. Multi-Service Support | 0/TBD | Not started | - |
