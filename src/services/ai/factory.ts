@@ -6,6 +6,7 @@
 import type { AIServiceAdapter } from './types.js';
 import HuggingFaceService from './huggingface.js';
 import { OpenAIService } from './openai.js';
+import { StabilityService } from './stability.js';
 import type { AIService } from '../../types/index.js';
 import { ConfigService } from '../config.js';
 
@@ -33,7 +34,15 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
       }
       return new OpenAIService(openaiKey);
 
-    // Phase 4 Plan 02: Add Stability AI case here
+    case 'stability':
+      // Required API key
+      const stabilityKey = apiKey || configService.getApiKey('stability');
+      if (!stabilityKey) {
+        throw new Error(
+          'Stability AI API key required. Set via: zoombg config set stabilityApiKey YOUR_KEY'
+        );
+      }
+      return new StabilityService(stabilityKey);
 
     default:
       throw new Error(`Unsupported AI service: ${service}`);

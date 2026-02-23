@@ -3,17 +3,20 @@
  * Requires API key for all operations
  */
 
-import StabilityAI from 'stability-ai';
+import * as StabilityAIModule from 'stability-ai';
 import { readFile, unlink } from 'node:fs/promises';
 import type { AIServiceAdapter, GenerationResult } from './types.js';
 import { AIServiceError } from '../errors.js';
+
+// Handle dual default export from stability-ai SDK
+const StabilityAI = (StabilityAIModule as any).default?.default || (StabilityAIModule as any).default || StabilityAIModule;
 
 /**
  * StabilityService implements AIServiceAdapter for Stability AI
  * Paid service requiring API key
  */
 export class StabilityService implements AIServiceAdapter {
-  private client: StabilityAI;
+  private client: any;
 
   /**
    * Create Stability service
