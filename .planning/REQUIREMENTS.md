@@ -19,7 +19,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **AI-01**: Tool generates images using Hugging Face free tier (no API key required)
 - [x] **AI-02**: Tool supports DALL-E 3 generation with OpenAI API key
 - [x] **AI-03**: Tool supports Stability AI generation with Stability API key
-- [ ] **AI-04**: Tool remembers last used AI service across sessions
+- [x] **AI-04**: Tool remembers last used AI service across sessions
 
 ### User Workflow
 
@@ -32,7 +32,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **CONFIG-01**: Tool stores API keys securely with proper file permissions (0600)
 - [x] **CONFIG-02**: User can select which AI service to use for generation
-- [ ] **CONFIG-03**: Tool persists service preference to configuration file
+- [x] **CONFIG-03**: Tool persists service preference to configuration file
 - [ ] **CONFIG-04**: Tool supports dry-run mode to test without saving to Zoom
 
 ## v2 Requirements
@@ -78,14 +78,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AI-01 | Phase 1 | Complete |
 | AI-02 | Phase 4 | Complete |
 | AI-03 | Phase 4 | Complete |
-| AI-04 | Phase 4 | Pending |
+| AI-04 | Phase 4 | Complete |
 | FLOW-01 | Phase 2 | Complete |
 | FLOW-02 | Phase 2 | Complete |
 | FLOW-03 | Phase 2 | Complete |
 | FLOW-04 | Phase 2 | Complete |
 | CONFIG-01 | Phase 1 | Complete |
 | CONFIG-02 | Phase 3 | Complete |
-| CONFIG-03 | Phase 4 | Pending |
+| CONFIG-03 | Phase 4 | Complete |
 | CONFIG-04 | Phase 5 | Pending |
 
 **Coverage:**

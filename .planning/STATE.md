@@ -11,16 +11,16 @@ See: .planning/PROJECT.md (updated 2025-02-21)
 
 Phase: 4 of 5 (Multi-Service Support)
 Plan: 3 of 3 in current phase
-Status: In Progress
-Last activity: 2026-02-23 — Completed plan 04-02 (Stability AI Integration)
+Status: Complete
+Last activity: 2026-02-23 — Completed plan 04-03 (Service Preference Persistence)
 
-Progress: [██████░░░░] 67% (2/3 plans in phase 4)
+Progress: [██████████] 100% (3/3 plans in phase 4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 2.8 minutes
+- Total plans completed: 8
+- Average duration: 2.5 minutes
 - Total execution time: 0.3 hours
 
 **By Phase:**
@@ -30,16 +30,16 @@ Progress: [██████░░░░] 67% (2/3 plans in phase 4)
 | Phase 1 | 2 | 6.4 min | 3.2 min |
 | Phase 2 | 2 | 5.3 min | 2.7 min |
 | Phase 3 | 1 | 3.7 min | 3.7 min |
-| Phase 4 | 2 | 5.1 min | 2.6 min |
+| Phase 4 | 3 | 6.3 min | 2.1 min |
 
 **Recent Plans:**
 | Plan | Duration | Tasks | Files | Completed |
 |------|----------|-------|-------|-----------|
+| 04-03 | 1.2 min | 3 | 1 | 2026-02-23 |
 | 04-02 | 2.7 min | 3 | 2 | 2026-02-23 |
 | 04-01 | 2.4 min | 3 | 4 | 2026-02-23 |
 | 03-01 | 3.7 min | 3 | 3 | 2026-02-22 |
 | 02-02 | 3.0 min | 3 | 3 | 2026-02-22 |
-| 02-01 | 2.3 min | 3 | 5 | 2026-02-22 |
 
 ## Accumulated Context
 
@@ -79,6 +79,9 @@ Recent decisions affecting current work:
 - [Phase 04]: Unlink Stability temp files immediately after buffer extraction to prevent disk accumulation (Plan 04-02)
 - [Phase 04]: Use any type for SDK client when third-party lacks TypeScript definitions (Plan 04-02)
 - [Phase 04]: Set service-specific timeouts: HuggingFace 120s, OpenAI 60s, Stability 90s (Plan 04-02)
+- [Phase 04-03]: Persist service AFTER successful save (not before generation) to avoid storing failed services
+- [Phase 04-03]: Fallback chain order: CLI flag > lastUsedService > huggingface default for optimal UX
+- [Phase 04-03]: Workflow owns service selection logic - CLI only validates and passes through
 
 ### Pending Todos
 
@@ -97,5 +100,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-23 (plan execution)
-Stopped at: Completed plan 04-02 (Stability AI Integration) - SUMMARY.md created, STATE.md and ROADMAP.md updated, Phase 4 in progress
+Stopped at: Completed plan 04-03 (Service Preference Persistence) - Phase 4 complete, all multi-service support implemented
 Resume file: None
