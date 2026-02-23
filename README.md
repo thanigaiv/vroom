@@ -54,7 +54,7 @@ npm install -g vroom
 ### Build from source
 
 ```bash
-git clone https://github.com/tvellore/vroom.git
+git clone https://github.com/thanigaiv/vroom.git
 cd vroom
 npm install
 npm run build
@@ -69,14 +69,17 @@ npm link
 vroom "serene mountain landscape at sunset"
 ```
 
-### Configure API keys for premium services
+### Configure API keys for AI services
 
 ```bash
-# OpenAI DALL-E 3
-vroom config set openaiApiKey sk-YOUR-KEY
+# HuggingFace (optional - improves free tier rate limits)
+vroom config set huggingfaceApiKey hf_YOUR_KEY
 
-# Stability AI
-vroom config set stabilityApiKey sk-YOUR-KEY
+# OpenAI DALL-E 3 (required for OpenAI service)
+vroom config set openaiApiKey sk-YOUR_KEY
+
+# Stability AI (required for Stability service)
+vroom config set stabilityApiKey sk-YOUR_KEY
 ```
 
 ### Use specific AI service
@@ -118,10 +121,12 @@ vroom --version
 ### Configuration Management
 
 ```bash
-# Set API key
-vroom config set openaiApiKey YOUR_KEY
+# Set API keys (choose the services you want to use)
+vroom config set huggingfaceApiKey hf_YOUR_KEY
+vroom config set openaiApiKey sk-YOUR_KEY
+vroom config set stabilityApiKey sk-YOUR_KEY
 
-# Get API key
+# Get specific API key
 vroom config get openaiApiKey
 
 # List all configuration
@@ -356,8 +361,8 @@ MIT
 
 ## Links
 
-- GitHub: https://github.com/tvellore/vroom
-- Issues: https://github.com/tvellore/vroom/issues
+- GitHub: https://github.com/thanigaiv/vroom
+- Issues: https://github.com/thanigaiv/vroom/issues
 - NPM: (publish to npm for public package)
 
 ## Credits
