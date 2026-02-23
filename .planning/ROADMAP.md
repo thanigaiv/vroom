@@ -93,10 +93,11 @@ Plans:
   1. User can run tool in dry-run mode to test without saving to Zoom
   2. Tool provides clear feedback about what would happen in dry-run mode
   3. Tool handles edge cases gracefully (network errors, rate limits, timeout)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] TBD
+- [ ] 05-01-PLAN.md — Dry-run mode with conditional persistence and clear feedback
+- [ ] 05-02-PLAN.md — Error resilience with network error translation, timeout enforcement, and retry logic
 
 ## Progress
 
@@ -109,4 +110,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Workflow Orchestration | 2/2 | Complete    | 2026-02-22 |
 | 3. CLI Interface | 1/1 | Complete    | 2026-02-22 |
 | 4. Multi-Service Support | 2/3 | In progress | - |
-| 5. Enhancement & Polish | 0/TBD | Not started | - |
+| 5. Enhancement & Polish | 0/2 | Not started | - |
