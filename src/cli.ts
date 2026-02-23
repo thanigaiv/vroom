@@ -60,6 +60,11 @@ Documentation: https://github.com/user/zoombg
     `)
     .action(async (prompt, options) => {
       try {
+        // Show dry-run warning upfront
+        if (options.dryRun) {
+          console.log(pc.yellow('Running in dry-run mode - no changes will be saved\n'));
+        }
+
         // Validate service (research lines 624-638)
         const validServices = ['huggingface', 'openai', 'stability'];
         if (!validServices.includes(options.service)) {
