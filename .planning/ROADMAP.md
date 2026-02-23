@@ -81,7 +81,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — OpenAI DALL-E 3 integration with SDK, service adapter, factory registration
+- [x] 04-01-PLAN.md — OpenAI DALL-E 3 integration with SDK, service adapter, factory registration
 - [ ] 04-02-PLAN.md — Stability AI integration with SDK, service adapter, architecture validation
 - [ ] 04-03-PLAN.md — Service preference persistence with sticky selection and CLI validation
 
@@ -108,5 +108,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation & Core Services | 3/3 | Complete    | 2026-02-22 |
 | 2. Workflow Orchestration | 2/2 | Complete    | 2026-02-22 |
 | 3. CLI Interface | 1/1 | Complete    | 2026-02-22 |
-| 4. Multi-Service Support | 0/3 | Not started | - |
+| 4. Multi-Service Support | 1/3 | In progress | - |
 | 5. Enhancement & Polish | 0/TBD | Not started | - |

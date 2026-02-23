@@ -17,7 +17,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### AI Image Generation
 
 - [x] **AI-01**: Tool generates images using Hugging Face free tier (no API key required)
-- [ ] **AI-02**: Tool supports DALL-E 3 generation with OpenAI API key
+- [x] **AI-02**: Tool supports DALL-E 3 generation with OpenAI API key
 - [ ] **AI-03**: Tool supports Stability AI generation with Stability API key
 - [ ] **AI-04**: Tool remembers last used AI service across sessions
 
@@ -76,7 +76,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ZOOM-03 | Phase 1 | Complete (Plan 01-02) |
 | ZOOM-04 | Phase 2 | Complete |
 | AI-01 | Phase 1 | Complete |
-| AI-02 | Phase 4 | Pending |
+| AI-02 | Phase 4 | Complete |
 | AI-03 | Phase 4 | Pending |
 | AI-04 | Phase 4 | Pending |
 | FLOW-01 | Phase 2 | Complete |
