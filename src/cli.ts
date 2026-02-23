@@ -6,7 +6,7 @@ import { resolve, dirname, join } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import pc from 'picocolors';
 import { generateWorkflow } from './workflows/generate.js';
-import { ZoomBGError } from './services/errors.js';
+import { ZoomBGError, NetworkError, TimeoutError, RateLimitError } from './services/errors.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,6 +48,13 @@ Examples:
 
   Test without saving (dry-run):
     $ zoombg "ocean waves" --dry-run
+    (Generates and previews image, but doesn't save to Zoom)
+
+Dry-Run Mode:
+  The --dry-run flag simulates the complete workflow without:
+  - Saving files to Zoom backgrounds directory
+  - Persisting service preference to config
+  Use this to test API keys, preview images, or validate prompts.
 
 Documentation: https://github.com/user/zoombg
     `)
@@ -90,7 +97,23 @@ Documentation: https://github.com/user/zoombg
 }
 
 function handleError(error: Error | unknown): void {
-  if (error instanceof ZoomBGError) {
+  if (error instanceof NetworkError) {
+    console.error(pc.red('Network Error:'), error.message);
+    console.error(pc.yellow('Solution:'), error.userMessage);
+    console.error(pc.dim(`Error code: ${error.code}`));
+    process.exitCode = 1;
+  } else if (error instanceof TimeoutError) {
+    console.error(pc.red('Timeout Error:'), error.message);
+    console.error(pc.yellow('Solution:'), error.userMessage);
+    process.exitCode = 1;
+  } else if (error instanceof RateLimitError) {
+    console.error(pc.red('Rate Limit Error:'), error.message);
+    console.error(pc.yellow('Solution:'), error.userMessage);
+    if (error.retryAfter) {
+      console.error(pc.dim(`Retry after: ${error.retryAfter} seconds`));
+    }
+    process.exitCode = 1;
+  } else if (error instanceof ZoomBGError) {
     console.error(pc.red('Error:'), error.message);
     console.error(pc.yellow('Solution:'), error.userMessage);
     process.exitCode = 1;
@@ -102,6 +125,10 @@ function handleError(error: Error | unknown): void {
       console.error(pc.yellow('Suggestion:'), 'Check that all required files exist');
     } else if (error.message.includes('EACCES')) {
       console.error(pc.yellow('Suggestion:'), 'Check file permissions');
+    } else if (error.message.includes('ETIMEDOUT')) {
+      console.error(pc.yellow('Suggestion:'), 'Check your internet connection and try again');
+    } else if (error.message.includes('ECONNREFUSED')) {
+      console.error(pc.yellow('Suggestion:'), 'The service may be temporarily unavailable');
     }
 
     process.exitCode = 1;
