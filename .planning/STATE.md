@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-02-21)
 
 **Core value:** Quickly create and set custom Zoom backgrounds using AI without leaving the terminal.
-**Current focus:** Phase 4: Multi-Service Support
+**Current focus:** Phase 5: Enhancement & Polish
 
 ## Current Position
 
-Phase: 4 of 5 (Multi-Service Support)
-Plan: 3 of 3 in current phase
+Phase: 5 of 5 (Enhancement & Polish)
+Plan: 2 of 2 in current phase
 Status: Complete
-Last activity: 2026-02-23 — Completed plan 04-03 (Service Preference Persistence)
+Last activity: 2026-02-23 — Completed plan 05-02 (Robust Error Handling)
 
-Progress: [██████████] 100% (3/3 plans in phase 4)
+Progress: [██████████] 100% (2/2 plans in phase 5)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 10
 - Average duration: 2.5 minutes
-- Total execution time: 0.3 hours
+- Total execution time: 0.4 hours
 
 **By Phase:**
 
@@ -31,15 +31,16 @@ Progress: [██████████] 100% (3/3 plans in phase 4)
 | Phase 2 | 2 | 5.3 min | 2.7 min |
 | Phase 3 | 1 | 3.7 min | 3.7 min |
 | Phase 4 | 3 | 6.3 min | 2.1 min |
+| Phase 5 | 2 | 5.0 min | 2.5 min |
 
 **Recent Plans:**
 | Plan | Duration | Tasks | Files | Completed |
 |------|----------|-------|-------|-----------|
+| 05-02 | 2.7 min | 3 | 4 | 2026-02-23 |
+| 05-01 | 2.2 min | 3 | 2 | 2026-02-23 |
 | 04-03 | 1.2 min | 3 | 1 | 2026-02-23 |
 | 04-02 | 2.7 min | 3 | 2 | 2026-02-23 |
 | 04-01 | 2.4 min | 3 | 4 | 2026-02-23 |
-| 03-01 | 3.7 min | 3 | 3 | 2026-02-22 |
-| 02-02 | 3.0 min | 3 | 3 | 2026-02-22 |
 
 ## Accumulated Context
 
@@ -82,6 +83,16 @@ Recent decisions affecting current work:
 - [Phase 04-03]: Persist service AFTER successful save (not before generation) to avoid storing failed services
 - [Phase 04-03]: Fallback chain order: CLI flag > lastUsedService > huggingface default for optimal UX
 - [Phase 04-03]: Workflow owns service selection logic - CLI only validates and passes through
+- [Phase 05-01]: Dry-run mode shows what would happen without modifying files or persisting state
+- [Phase 05-01]: Dry-run flag validation at CLI level with early exit on invalid flags
+- [Phase 05-02]: Transient errors (429, 500, 503, 502, ETIMEDOUT, ECONNREFUSED, ECONNRESET) automatically retried with exponential backoff
+- [Phase 05-02]: Permanent errors (401, 400, 403) not retried to avoid wasting API quotas
+- [Phase 05-02]: Service-specific timeouts: HuggingFace 120s, OpenAI 60s, Stability 90s
+- [Phase 05-02]: Network error codes translated to user-actionable messages
+- [Phase 05-02]: Maximum 2 retry attempts with jittered exponential backoff
+- [Phase 05-01]: Dry-run uses cyan color for visibility and [DRY-RUN] prefix for clarity
+- [Phase 05-01]: Dry-run mode performs real AI generation and browser preview, only skips persistence
+- [Phase 05-01]: Show full save path in dry-run message so users know exact location without creating files
 
 ### Pending Todos
 
@@ -100,5 +111,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-23 (plan execution)
-Stopped at: Completed plan 04-03 (Service Preference Persistence) - Phase 4 complete, all multi-service support implemented
+Stopped at: Completed plan 05-02 (Robust Error Handling) - Phase 5 complete, all enhancement and polish implemented
 Resume file: None

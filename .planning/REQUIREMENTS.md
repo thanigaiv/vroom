@@ -33,7 +33,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **CONFIG-01**: Tool stores API keys securely with proper file permissions (0600)
 - [x] **CONFIG-02**: User can select which AI service to use for generation
 - [x] **CONFIG-03**: Tool persists service preference to configuration file
-- [ ] **CONFIG-04**: Tool supports dry-run mode to test without saving to Zoom
+- [x] **CONFIG-04**: Tool supports dry-run mode to test without saving to Zoom
 
 ## v2 Requirements
 
@@ -86,7 +86,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CONFIG-01 | Phase 1 | Complete |
 | CONFIG-02 | Phase 3 | Complete |
 | CONFIG-03 | Phase 4 | Complete |
-| CONFIG-04 | Phase 5 | Pending |
+| CONFIG-04 | Phase 5 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 16 total
