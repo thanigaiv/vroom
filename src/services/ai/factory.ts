@@ -7,13 +7,14 @@ import type { AIServiceAdapter } from './types.js';
 import HuggingFaceService from './huggingface.js';
 import { OpenAIService } from './openai.js';
 import { StabilityService } from './stability.js';
+import { GleanService } from './glean.js';
 import type { AIService } from '../../types/index.js';
 import { ConfigService } from '../config.js';
 import { NetworkError, TimeoutError, RateLimitError } from '../errors.js';
 
 /**
  * Create an AI service adapter based on service type
- * @param service Service name ('huggingface', 'openai', 'stability')
+ * @param service Service name ('huggingface', 'openai', 'stability', 'glean')
  * @param apiKey Optional API key for the service
  * @returns AIServiceAdapter instance
  * @throws Error if service is not supported
@@ -30,7 +31,7 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
       const openaiKey = apiKey || configService.getApiKey('openai');
       if (!openaiKey) {
         throw new Error(
-          'OpenAI API key required. Set via: zoombg config set openaiApiKey YOUR_KEY'
+          'OpenAI API key required. Set via: vroom config set openaiApiKey YOUR_KEY'
         );
       }
       return new OpenAIService(openaiKey);
@@ -40,10 +41,27 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
       const stabilityKey = apiKey || configService.getApiKey('stability');
       if (!stabilityKey) {
         throw new Error(
-          'Stability AI API key required. Set via: zoombg config set stabilityApiKey YOUR_KEY'
+          'Stability AI API key required. Set via: vroom config set stabilityApiKey YOUR_KEY'
         );
       }
       return new StabilityService(stabilityKey);
+
+    case 'glean':
+      // Required API key and instance
+      const gleanKey = apiKey || configService.getApiKey('glean');
+      const gleanInstance = configService.getGleanInstance();
+
+      if (!gleanKey) {
+        throw new Error(
+          'Glean API key required. Set via: vroom config set gleanApiKey YOUR_KEY'
+        );
+      }
+      if (!gleanInstance) {
+        throw new Error(
+          'Glean instance name required. Set via: vroom config set gleanInstance YOUR_INSTANCE'
+        );
+      }
+      return new GleanService(gleanKey, gleanInstance);
 
     default:
       throw new Error(`Unsupported AI service: ${service}`);
@@ -52,12 +70,13 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
 
 /**
  * Service-specific timeout values (ms)
- * From Phase 04-02 decisions: HuggingFace 120s, OpenAI 60s, Stability 90s
+ * From Phase 04-02 decisions: HuggingFace 120s, OpenAI 60s, Stability 90s, Glean 60s
  */
 const SERVICE_TIMEOUTS: Record<string, number> = {
   huggingface: 120000,  // 120 seconds (free tier is slow)
   openai: 60000,        // 60 seconds
-  stability: 90000      // 90 seconds
+  stability: 90000,     // 90 seconds
+  glean: 60000          // 60 seconds
 };
 
 /**

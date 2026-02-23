@@ -2,7 +2,7 @@
 
 Generate AI-powered Zoom backgrounds from text prompts with style.
 
-Vroom is a command-line tool that creates custom Zoom virtual backgrounds using AI image generation. Choose from free (HuggingFace) or premium services (OpenAI DALL-E 3, Stability AI), preview images in your browser, and automatically install approved backgrounds to Zoom.
+Vroom is a command-line tool that creates custom Zoom virtual backgrounds using AI image generation. Choose from free (HuggingFace) or premium services (OpenAI DALL-E 3, Stability AI, Glean), preview images in your browser, and automatically install approved backgrounds to Zoom.
 
 ## Features
 
@@ -10,6 +10,7 @@ Vroom is a command-line tool that creates custom Zoom virtual backgrounds using 
 - **HuggingFace** (free tier) - No API key required
 - **OpenAI DALL-E 3** - High-quality images with your API key
 - **Stability AI** - Alternative premium option
+- **Glean** - Enterprise AI with organizational context
 
 ### 🔒 **Secure Configuration**
 - API keys stored with 0600 file permissions
@@ -80,6 +81,10 @@ vroom config set openaiApiKey sk-YOUR_KEY
 
 # Stability AI (required for Stability service)
 vroom config set stabilityApiKey sk-YOUR_KEY
+
+# Glean (required for Glean service - also needs instance name)
+vroom config set gleanApiKey YOUR_GLEAN_TOKEN
+vroom config set gleanInstance your-company-name
 ```
 
 ### Use specific AI service
@@ -108,6 +113,9 @@ vroom "your description here"
 # Use specific service
 vroom "cyberpunk cityscape" --service stability
 
+# Use Glean (enterprise AI)
+vroom "corporate office design" --service glean
+
 # Test without saving
 vroom "forest scene" --dry-run
 
@@ -125,6 +133,8 @@ vroom --version
 vroom config set huggingfaceApiKey hf_YOUR_KEY
 vroom config set openaiApiKey sk-YOUR_KEY
 vroom config set stabilityApiKey sk-YOUR_KEY
+vroom config set gleanApiKey YOUR_GLEAN_TOKEN
+vroom config set gleanInstance your-company-name
 
 # Get specific API key
 vroom config get openaiApiKey
@@ -155,12 +165,14 @@ Once you use a service and save an image, Vroom remembers it for next time.
 | **HuggingFace** | Optional | Free tier available | Slower (120s) | Good | 120s |
 | **OpenAI DALL-E 3** | Required | Pay per image | Fast (60s) | Excellent | 60s |
 | **Stability AI** | Required | Pay per image | Medium (90s) | Excellent | 90s |
+| **Glean** | Required + Instance | Enterprise pricing | Fast (60s) | Excellent | 60s |
 
 ### Getting API Keys
 
 - **OpenAI**: https://platform.openai.com/api-keys
 - **Stability AI**: https://platform.stability.ai/account/keys
 - **HuggingFace**: https://huggingface.co/settings/tokens (optional)
+- **Glean**: Your Glean admin console (requires Glean Key customer + image generation enabled)
 
 ## Workflow
 

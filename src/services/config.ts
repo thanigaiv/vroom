@@ -21,6 +21,14 @@ const schema = {
     type: 'string',
     default: ''
   },
+  gleanApiKey: {
+    type: 'string',
+    default: ''
+  },
+  gleanInstance: {
+    type: 'string',
+    default: ''
+  },
   lastUsedService: {
     type: 'string',
     default: 'huggingface'
@@ -86,6 +94,13 @@ export class ConfigService {
   async setLastUsedService(service: AIService): Promise<void> {
     this.store.set('lastUsedService', service);
     await this.enforceSecurePermissions();
+  }
+
+  /**
+   * Get Glean instance name
+   */
+  getGleanInstance(): string | undefined {
+    return this.store.get('gleanInstance') as string | undefined;
   }
 
   /**

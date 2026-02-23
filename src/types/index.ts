@@ -9,10 +9,12 @@ export interface Config {
   huggingfaceApiKey?: string;
   openaiApiKey?: string;
   stabilityApiKey?: string;
+  gleanApiKey?: string;
+  gleanInstance?: string;
   lastUsedService: string;
 }
 
 /**
  * Supported AI service providers
  */
-export type AIService = 'huggingface' | 'openai' | 'stability';
+export type AIService = 'huggingface' | 'openai' | 'stability' | 'glean';

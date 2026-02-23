@@ -30,7 +30,7 @@ async function main() {
     .argument('[prompt]', 'Description of the background to generate')
     .option(
       '-s, --service <name>',
-      'AI service (huggingface, openai, stability)',
+      'AI service (huggingface, openai, stability, glean)',
       'huggingface'
     )
     .option('--dry-run', 'simulate operation without saving to Zoom')
@@ -56,7 +56,7 @@ Dry-Run Mode:
   - Persisting service preference to config
   Use this to test API keys, preview images, or validate prompts.
 
-Documentation: https://github.com/tvellore/vroom
+Documentation: https://github.com/thanigaiv/vroom
     `)
     .action(async (prompt, options) => {
       try {
@@ -66,7 +66,7 @@ Documentation: https://github.com/tvellore/vroom
         }
 
         // Validate service (research lines 624-638)
-        const validServices = ['huggingface', 'openai', 'stability'];
+        const validServices = ['huggingface', 'openai', 'stability', 'glean'];
         if (!validServices.includes(options.service)) {
           console.error(
             pc.red('Error:'),
