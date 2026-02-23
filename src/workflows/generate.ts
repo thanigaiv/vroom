@@ -19,6 +19,8 @@ import { BackgroundManager } from '../services/zoom/background-manager.js';
 import { ZoomVerifier } from '../services/zoom/verifier.js';
 import { showPreview } from './preview.js';
 import { cleanupManager } from '../utils/cleanup.js';
+import { ConfigService } from '../services/config.js';
+import type { AIService } from '../types/index.js';
 
 /**
  * Options for the workflow.
@@ -57,11 +59,20 @@ export interface WorkflowOptions {
  * await generateWorkflow({ service: 'openai' });
  */
 export async function generateWorkflow(options: WorkflowOptions = {}): Promise<void> {
+  const configService = new ConfigService();
+
   const {
     initialPrompt,
-    service = 'huggingface',
     interactive = true
   } = options;
+
+  // Determine service: CLI flag > lastUsedService > default
+  let service = options.service;
+  if (!service) {
+    const lastUsed = configService.getLastUsedService();
+    service = lastUsed || 'huggingface';
+  }
+
   // Verify Zoom prerequisites (fail fast before generation)
   const verifier = new ZoomVerifier();
   await verifier.verify(); // Throws ZoomNotInstalledError or ZoomNotLoggedInError
@@ -139,6 +150,9 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
         const savePath = join(bgDir, filename);
 
         await writeFile(savePath, result.buffer);
+
+        // Persist service preference for next session
+        await configService.setLastUsedService(service as AIService);
 
         saveSpinner.succeed(`Saved as ${filename}`);
         console.log(`\nZoom background saved to: ${savePath}`);
