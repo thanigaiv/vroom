@@ -14,7 +14,8 @@ import { confirm, input } from '@inquirer/prompts';
 import { writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import ora from 'ora';
-import { createAIService } from '../services/ai/factory.js';
+import pc from 'picocolors';
+import { createAIServiceWithResilience } from '../services/ai/factory.js';
 import { BackgroundManager } from '../services/zoom/background-manager.js';
 import { ZoomVerifier } from '../services/zoom/verifier.js';
 import { showPreview } from './preview.js';
@@ -29,6 +30,7 @@ export interface WorkflowOptions {
   initialPrompt?: string;
   service?: string;
   interactive?: boolean;
+  dryRun?: boolean;
 }
 
 /**
@@ -63,7 +65,8 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
 
   const {
     initialPrompt,
-    interactive = true
+    interactive = true,
+    dryRun = false
   } = options;
 
   // Determine service: CLI flag > lastUsedService > default
@@ -98,7 +101,7 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
       // Generate with spinner (may take 15-90 seconds on free tier)
       const spinner = ora('Generating image (may take 15-90 seconds)...').start();
 
-      const aiService = createAIService(service as any);
+      const aiService = createAIServiceWithResilience(service as any);
       const result = await aiService.generateImage(currentPrompt);
 
       // Stop spinner before showing prompt (prevents terminal corruption)
@@ -140,22 +143,37 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
         }
       } else {
         // Approval flow: save to Zoom backgrounds directory
-        const saveSpinner = ora('Saving to Zoom backgrounds...').start();
+        if (dryRun) {
+          // Dry-run mode: show what would happen without saving
+          const bgManager = new BackgroundManager();
+          const bgDir = await bgManager.findBackgroundsDirectory();
+          const filename = `zoombg-${Date.now()}.png`;
+          const savePath = join(bgDir, filename);
 
-        const bgManager = new BackgroundManager();
-        const bgDir = await bgManager.findBackgroundsDirectory();
+          console.log(pc.cyan('\n[DRY-RUN] Simulation mode - no files saved'));
+          console.log(pc.dim(`  Would save to: ${savePath}`));
+          console.log(pc.dim(`  Image size: ${result.buffer.length} bytes`));
+          console.log(pc.dim(`  Service: ${service}`));
+          console.log(pc.dim(`  Would persist service preference: ${service}`));
+        } else {
+          // Normal mode: actually save
+          const saveSpinner = ora('Saving to Zoom backgrounds...').start();
 
-        // Generate unique filename with timestamp
-        const filename = `zoombg-${Date.now()}.png`;
-        const savePath = join(bgDir, filename);
+          const bgManager = new BackgroundManager();
+          const bgDir = await bgManager.findBackgroundsDirectory();
 
-        await writeFile(savePath, result.buffer);
+          // Generate unique filename with timestamp
+          const filename = `zoombg-${Date.now()}.png`;
+          const savePath = join(bgDir, filename);
 
-        // Persist service preference for next session
-        await configService.setLastUsedService(service as AIService);
+          await writeFile(savePath, result.buffer);
 
-        saveSpinner.succeed(`Saved as ${filename}`);
-        console.log(`\nZoom background saved to: ${savePath}`);
+          // Persist service preference for next session
+          await configService.setLastUsedService(service as AIService);
+
+          saveSpinner.succeed(`Saved as ${filename}`);
+          console.log(`\nZoom background saved to: ${savePath}`);
+        }
       }
     } catch (error) {
       // Propagate errors to caller (CLI will display user-friendly messages)

@@ -33,6 +33,7 @@ async function main() {
       'AI service (huggingface, openai, stability)',
       'huggingface'
     )
+    .option('--dry-run', 'simulate operation without saving to Zoom')
     .addHelpText('after', `
 
 Examples:
@@ -44,6 +45,9 @@ Examples:
 
   Use specific AI service:
     $ zoombg "modern office" --service openai
+
+  Test without saving (dry-run):
+    $ zoombg "ocean waves" --dry-run
 
 Documentation: https://github.com/user/zoombg
     `)
@@ -68,7 +72,8 @@ Documentation: https://github.com/user/zoombg
         await generateWorkflow({
           initialPrompt: prompt,
           service: options.service,
-          interactive: true  // Phase 3 only supports interactive mode
+          interactive: true,  // Phase 3 only supports interactive mode
+          dryRun: options.dryRun
         });
 
         process.exitCode = 0;
