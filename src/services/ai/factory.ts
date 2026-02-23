@@ -8,6 +8,7 @@ import HuggingFaceService from './huggingface.js';
 import { OpenAIService } from './openai.js';
 import { StabilityService } from './stability.js';
 import { GleanService } from './glean.js';
+import { BedrockService } from './bedrock.js';
 import type { AIService } from '../../types/index.js';
 import { ConfigService } from '../config.js';
 import { NetworkError, TimeoutError, RateLimitError } from '../errors.js';
@@ -63,6 +64,21 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
       }
       return new GleanService(gleanKey, gleanInstance);
 
+    case 'bedrock':
+      // Required AWS credentials
+      const awsAccessKeyId = apiKey || configService.get('awsAccessKeyId');
+      const awsSecretAccessKey = configService.get('awsSecretAccessKey');
+      const awsRegion = configService.get('awsRegion') || 'us-east-1';
+      const bedrockModelId = configService.get('bedrockModelId') || 'amazon.nova-canvas-v1:0';
+
+      if (!awsAccessKeyId || !awsSecretAccessKey) {
+        throw new Error(
+          'AWS credentials required. Set via: vroom config set awsAccessKeyId YOUR_KEY'
+        );
+      }
+
+      return new BedrockService(awsAccessKeyId, awsSecretAccessKey, awsRegion, bedrockModelId);
+
     default:
       throw new Error(`Unsupported AI service: ${service}`);
   }
@@ -70,13 +86,14 @@ export function createAIService(service: AIService, apiKey?: string): AIServiceA
 
 /**
  * Service-specific timeout values (ms)
- * From Phase 04-02 decisions: HuggingFace 120s, OpenAI 60s, Stability 90s, Glean 60s
+ * From Phase 04-02 decisions: HuggingFace 120s, OpenAI 60s, Stability 90s, Glean 60s, Bedrock 90s
  */
 const SERVICE_TIMEOUTS: Record<string, number> = {
   huggingface: 120000,  // 120 seconds (free tier is slow)
   openai: 60000,        // 60 seconds
   stability: 90000,     // 90 seconds
-  glean: 60000          // 60 seconds
+  glean: 60000,         // 60 seconds
+  bedrock: 90000        // 90 seconds
 };
 
 /**

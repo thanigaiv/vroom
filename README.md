@@ -2,7 +2,7 @@
 
 Generate AI-powered Zoom backgrounds from text prompts with style.
 
-Vroom is a command-line tool that creates custom Zoom virtual backgrounds using AI image generation. Choose from free (HuggingFace) or premium services (OpenAI DALL-E 3, Stability AI, Glean), preview images in your browser, and automatically install approved backgrounds to Zoom.
+Vroom is a command-line tool that creates custom Zoom virtual backgrounds using AI image generation. Choose from free (HuggingFace) or premium services (OpenAI DALL-E 3, Stability AI, Amazon Bedrock, Glean), preview images in your browser, and automatically install approved backgrounds to Zoom.
 
 ## Features
 
@@ -10,6 +10,7 @@ Vroom is a command-line tool that creates custom Zoom virtual backgrounds using 
 - **HuggingFace** (free tier) - No API key required
 - **OpenAI DALL-E 3** - High-quality images with your API key
 - **Stability AI** - Alternative premium option
+- **Amazon Bedrock** - Nova Canvas, Titan Image Generator, and Stable Diffusion 3.5
 - **Glean** - Enterprise AI with organizational context
 
 ### 🔒 **Secure Configuration**
@@ -82,6 +83,11 @@ vroom config set openaiApiKey sk-YOUR_KEY
 # Stability AI (required for Stability service)
 vroom config set stabilityApiKey sk-YOUR_KEY
 
+# Amazon Bedrock (required for Bedrock service - uses AWS IAM credentials)
+vroom config set awsAccessKeyId AKIA...
+vroom config set awsSecretAccessKey wJalr...
+vroom config set awsRegion us-east-1  # optional, defaults to us-east-1
+
 # Glean (required for Glean service - also needs instance name)
 vroom config set gleanApiKey YOUR_GLEAN_TOKEN
 vroom config set gleanInstance your-company-name
@@ -116,6 +122,9 @@ vroom "cyberpunk cityscape" --service stability
 # Use Glean (enterprise AI)
 vroom "corporate office design" --service glean
 
+# Use Amazon Bedrock
+vroom "mountain sunset" --service bedrock
+
 # Test without saving
 vroom "forest scene" --dry-run
 
@@ -133,6 +142,9 @@ vroom --version
 vroom config set huggingfaceApiKey hf_YOUR_KEY
 vroom config set openaiApiKey sk-YOUR_KEY
 vroom config set stabilityApiKey sk-YOUR_KEY
+vroom config set awsAccessKeyId AKIA...
+vroom config set awsSecretAccessKey wJalr...
+vroom config set awsRegion us-east-1  # optional for Bedrock
 vroom config set gleanApiKey YOUR_GLEAN_TOKEN
 vroom config set gleanInstance your-company-name
 
@@ -165,12 +177,14 @@ Once you use a service and save an image, Vroom remembers it for next time.
 | **HuggingFace** | Optional | Free tier available | Slower (120s) | Good | 120s |
 | **OpenAI DALL-E 3** | Required | Pay per image | Fast (60s) | Excellent | 60s |
 | **Stability AI** | Required | Pay per image | Medium (90s) | Excellent | 90s |
+| **Amazon Bedrock** | AWS IAM credentials | Pay per request | Medium (90s) | Excellent | 90s |
 | **Glean** | Required + Instance | Enterprise pricing | Fast (60s) | Excellent | 60s |
 
 ### Getting API Keys
 
 - **OpenAI**: https://platform.openai.com/api-keys
 - **Stability AI**: https://platform.stability.ai/account/keys
+- **Amazon Bedrock**: AWS IAM Console (https://console.aws.amazon.com/iam/) - Requires IAM user with `bedrock:InvokeModel` permission
 - **HuggingFace**: https://huggingface.co/settings/tokens (optional)
 - **Glean**: Your Glean admin console (requires Glean Key customer + image generation enabled)
 
@@ -386,6 +400,7 @@ Built with:
 - [OpenAI SDK](https://github.com/openai/openai-node) - DALL-E 3 integration
 - [HuggingFace Inference](https://huggingface.co/docs/huggingface.js) - Free tier AI
 - [Stability AI SDK](https://platform.stability.ai/docs) - Stable Diffusion
+- [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js-v3) - Amazon Bedrock integration
 
 ---
 

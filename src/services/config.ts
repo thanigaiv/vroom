@@ -29,6 +29,22 @@ const schema = {
     type: 'string',
     default: ''
   },
+  awsAccessKeyId: {
+    type: 'string',
+    default: ''
+  },
+  awsSecretAccessKey: {
+    type: 'string',
+    default: ''
+  },
+  awsRegion: {
+    type: 'string',
+    default: 'us-east-1'
+  },
+  bedrockModelId: {
+    type: 'string',
+    default: 'amazon.nova-canvas-v1:0'
+  },
   lastUsedService: {
     type: 'string',
     default: 'huggingface'
@@ -101,6 +117,38 @@ export class ConfigService {
    */
   getGleanInstance(): string | undefined {
     return this.store.get('gleanInstance') as string | undefined;
+  }
+
+  /**
+   * Get a generic config value by key
+   */
+  get<K extends keyof Config>(key: K): Config[K] {
+    return this.store.get(key);
+  }
+
+  /**
+   * Set a generic config value by key and re-enforce permissions
+   */
+  async set<K extends keyof Config>(key: K, value: Config[K]): Promise<void> {
+    this.store.set(key, value);
+    await this.enforceSecurePermissions();
+  }
+
+  /**
+   * Get all AWS configuration at once
+   */
+  getAwsConfig(): {
+    accessKeyId: string | undefined;
+    secretAccessKey: string | undefined;
+    region: string | undefined;
+    modelId: string | undefined;
+  } {
+    return {
+      accessKeyId: this.store.get('awsAccessKeyId'),
+      secretAccessKey: this.store.get('awsSecretAccessKey'),
+      region: this.store.get('awsRegion'),
+      modelId: this.store.get('bedrockModelId')
+    };
   }
 
   /**

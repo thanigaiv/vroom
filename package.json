@@ -21,6 +21,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.995.0",
     "@gleanwork/api-client": "^0.14.7",
     "@huggingface/inference": "^4.13.12",
     "@inquirer/prompts": "^8.2.1",
