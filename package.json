@@ -1,11 +1,11 @@
 {
-  "name": "zoombg",
+  "name": "vroom",
   "version": "0.1.0",
-  "description": "CLI tool for generating AI-powered Zoom backgrounds",
+  "description": "CLI tool for generating AI-powered Zoom backgrounds with style",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "zoombg": "./dist/cli.js"
+    "vroom": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",

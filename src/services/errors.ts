@@ -1,9 +1,9 @@
 /**
- * Custom error types for ZoomBG with user-friendly messages
+ * Custom error types for Vroom with user-friendly messages
  */
 
 /**
- * Base error class for all ZoomBG errors
+ * Base error class for all Vroom errors
  * Includes both technical message (for logs) and userMessage (for display)
  */
 export class ZoomBGError extends Error {

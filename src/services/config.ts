@@ -35,7 +35,7 @@ export class ConfigService {
 
   constructor() {
     this.store = new Conf({
-      projectName: 'zoombg',
+      projectName: 'vroom',
       schema: schema as any
     });
 

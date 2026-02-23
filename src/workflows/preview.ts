@@ -38,8 +38,8 @@ export async function showPreview(imageBuffer: Buffer): Promise<string> {
   let tempDir: string | undefined;
 
   try {
-    // Create unique temp directory with zoombg- prefix
-    tempDir = await mkdtemp(join(tmpdir(), 'zoombg-'));
+    // Create unique temp directory with vroom- prefix
+    tempDir = await mkdtemp(join(tmpdir(), 'vroom-'));
 
     // Generate HTML with embedded base64 image
     const html = generatePreviewHTML(imageBuffer);

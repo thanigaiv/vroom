@@ -1,5 +1,5 @@
 /**
- * Shared TypeScript type definitions for ZoomBG
+ * Shared TypeScript type definitions for Vroom
  */
 
 /**

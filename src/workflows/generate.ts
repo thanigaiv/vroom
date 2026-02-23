@@ -147,7 +147,7 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
           // Dry-run mode: show what would happen without saving
           const bgManager = new BackgroundManager();
           const bgDir = await bgManager.findBackgroundsDirectory();
-          const filename = `zoombg-${Date.now()}.png`;
+          const filename = `vroom-${Date.now()}.png`;
           const savePath = join(bgDir, filename);
 
           console.log(pc.cyan('\n[DRY-RUN] Simulation mode - no files saved'));
@@ -163,7 +163,7 @@ export async function generateWorkflow(options: WorkflowOptions = {}): Promise<v
           const bgDir = await bgManager.findBackgroundsDirectory();
 
           // Generate unique filename with timestamp
-          const filename = `zoombg-${Date.now()}.png`;
+          const filename = `vroom-${Date.now()}.png`;
           const savePath = join(bgDir, filename);
 
           await writeFile(savePath, result.buffer);

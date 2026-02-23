@@ -98,7 +98,7 @@ export class CleanupManager {
  * @example
  * import { cleanupManager } from './utils/cleanup.js';
  *
- * const tempDir = await mkdtemp(join(tmpdir(), 'zoombg-'));
+ * const tempDir = await mkdtemp(join(tmpdir(), 'vroom-'));
  * cleanupManager.register(async () => {
  *   await rm(tempDir, { recursive: true, force: true });
  * });

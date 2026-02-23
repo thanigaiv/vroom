@@ -24,7 +24,7 @@ async function main() {
   const program = new Command();
 
   program
-    .name('zoombg')
+    .name('vroom')
     .version(version)
     .description('Generate AI-powered Zoom backgrounds from text prompts')
     .argument('[prompt]', 'Description of the background to generate')
@@ -38,16 +38,16 @@ async function main() {
 
 Examples:
   Generate interactively:
-    $ zoombg
+    $ vroom
 
   Generate with prompt:
-    $ zoombg "serene mountain landscape at sunset"
+    $ vroom "serene mountain landscape at sunset"
 
   Use specific AI service:
-    $ zoombg "modern office" --service openai
+    $ vroom "modern office" --service openai
 
   Test without saving (dry-run):
-    $ zoombg "ocean waves" --dry-run
+    $ vroom "ocean waves" --dry-run
     (Generates and previews image, but doesn't save to Zoom)
 
 Dry-Run Mode:
@@ -56,7 +56,7 @@ Dry-Run Mode:
   - Persisting service preference to config
   Use this to test API keys, preview images, or validate prompts.
 
-Documentation: https://github.com/user/zoombg
+Documentation: https://github.com/tvellore/vroom
     `)
     .action(async (prompt, options) => {
       try {
